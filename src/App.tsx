@@ -1,35 +1,38 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import CardComponent from "./components/Card";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [showFirstCard, setShowFirstCard] = useState(true);
+
+  const toggleCard = () => {
+    if (showFirstCard) {
+      setShowFirstCard(false);
+    } else {
+      setShowFirstCard(true);
+    }
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="App">
+      <div className="card-container">
+        {showFirstCard ? (
+          <CardComponent
+            title="Card Title"
+            image="https://via.placeholder.com/150"
+            content="Some quick example text to build on the card title and make up the bulk of the card's content."
+            onClick={toggleCard}
+          />
+        ) : (
+          <CardComponent
+            title="Special Title Treatment"
+            content="With supporting text below as a natural lead-in to additional content."
+            onClick={toggleCard}
+          />
+        )
+        }
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;
